@@ -26,7 +26,7 @@ namespace DevIO.App.ViewModels
         [DisplayName("Ativo?")]
         public bool Ativo { get; set; }
         
-        //[NotMapped]
+        [NotMapped]
         public IEnumerable<ProdutoViewModel> Produtos { get; set; }
     }
 }
