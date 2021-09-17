@@ -22,12 +22,14 @@ namespace DevIO.App.Controllers
             _enderecoRepository = enderecoRepository;
         }
 
+        [Route("lista-de-fornecedores")]
         public async Task<IActionResult> Index()
         {
             List<Fornecedor> fornecedores = await _fornecedorRepository.ObterTodos();
             return View(_mapper.Map<IEnumerable<FornecedorViewModel>>(fornecedores));
         }
 
+        [Route("dados-do-fornecedor/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
             var fornecedorViewModel = await ObterFornecedorEndereco(id);
@@ -36,11 +38,13 @@ namespace DevIO.App.Controllers
             return View(fornecedorViewModel);
         }
 
+        [Route("novo-fornecedor")]
         public async Task<IActionResult> Create()
         {
             return View();
         }
 
+        [Route("novo-fornecedor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(FornecedorViewModel fornecedorViewModel)
@@ -51,6 +55,7 @@ namespace DevIO.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("editar-fornecedor/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
             FornecedorViewModel fornecedorViewModel = await ObterFornecedorProdutosEndereco(id);
@@ -58,6 +63,7 @@ namespace DevIO.App.Controllers
             return View(fornecedorViewModel);
         }
 
+        [Route("editar-fornecedor/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, FornecedorViewModel fornecedorViewModel)
@@ -71,7 +77,7 @@ namespace DevIO.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
+        [Route("excluir-fornecedor/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             FornecedorViewModel fornecedorViewModel = await ObterFornecedorEndereco(id);
@@ -81,6 +87,7 @@ namespace DevIO.App.Controllers
             return View(fornecedorViewModel);
         }
 
+        [Route("excluir-fornecedor/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -92,10 +99,9 @@ namespace DevIO.App.Controllers
             await _fornecedorRepository.Remover(id);
 
             return RedirectToAction(nameof(Index));
-
-
         }
 
+        [Route("obter-endereco-fornecedor/{id:guid}")]
         public async Task<IActionResult> ObterEndereco(Guid id)
         {
             var fornecedor = await ObterFornecedorEndereco(id);
@@ -105,6 +111,7 @@ namespace DevIO.App.Controllers
             return PartialView("_DetalhesEndereco", fornecedor);
         }
 
+        [Route("atualizar-endereco-fornecedor/{id:guid}")]
         public async Task<IActionResult> AtualizarEndereco(Guid id)
         {
             var fornecedor = await ObterFornecedorEndereco(id);
@@ -117,6 +124,7 @@ namespace DevIO.App.Controllers
             return PartialView("_AtualizarEndereco", new FornecedorViewModel { Endereco = fornecedor.Endereco });
         }
 
+        [Route("atualizar-endereco-fornecedor/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AtualizarEndereco(FornecedorViewModel fornecedorViewModel)
