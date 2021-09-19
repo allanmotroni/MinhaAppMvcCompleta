@@ -38,7 +38,7 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>                
+            <tbody>
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => modelItem.Endereco.Logradouro)
@@ -62,9 +62,11 @@
                         @Html.DisplayFor(modelItem => modelItem.Endereco.Estado)
                     </td>
                     <td>
-                        <a asp-action="AtualizarEndereco" asp-route-id="@Model.Id" class="btn btn-info" data-modal=""><span title="Editar" class="fa fa-pencil-alt"></span></a>
+                        <a supress-by-action="Edit,ObterEndereco" asp-action="AtualizarEndereco" asp-route-id="@Model.Id" class="btn btn-info" data-modal="">
+                            <span title="Editar" class="fa fa-pencil-alt"></span>
+                        </a>
                     </td>
-                </tr>                
+                </tr>
             </tbody>
         </table>
 

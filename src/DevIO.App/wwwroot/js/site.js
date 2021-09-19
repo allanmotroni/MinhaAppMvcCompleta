@@ -39,7 +39,7 @@
     });
 }
 
-function BuscaCep() {
+function BuscaCep() {    
     $(document).ready(function () {
         function limpa_formulario_cep() {
             $("#Endereco_Logradouro").val("");
